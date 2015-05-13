@@ -178,7 +178,7 @@ View classes
 ````````````
 The way the translation methods work is the same as with controllers, via the t9n namespace. In the .gsp files of your views, you call the tags like methods:
 
-.. code:: groovy
+::
 	// several examples of method calls:
 	<%=t9n.getCurrentLocale() %>
 	<%=t9n.tr( s:"foo{0}", f["bar"] ) %>
