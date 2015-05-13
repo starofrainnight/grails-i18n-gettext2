@@ -178,16 +178,12 @@ View classes
 ````````````
 The way the translation methods work is the same as with controllers, via the t9n namespace. In the .gsp files of your views, you call the tags like methods:
 
+.. code:: groovy
 	// several examples of method calls:
-
 	<%=t9n.getCurrentLocale() %>
-
 	<%=t9n.tr( s:"foo{0}", f["bar"] ) %>
-
 	<%=t9n.trn( s:"foo", p:"foos", n:42 ) %>
-
 	<%=t9n.trc( c:"foo (verb)", s:"foo" ) %>
-
 	<%=t9n.marktr( s:"foo" ) %>
 
 Running included scripts
@@ -212,20 +208,24 @@ Tip: If a translation is missing in any of your ".po" files, the original string
 
 After your translators did their work, you use the following script to compile all translations into ResourceBundle class files. When done, these files will live in the "web-app/WEB-INF/i18n-gettext/" directory - ready for production.
 
+.. code:: bash
 	grails i18n-gettext makemo
 
 To create a message bundle with a different name, call:
 
+.. code:: bash
 	grails i18n-gettext makemo anybundlename
 
 To fetch strings from that specific bundle, state the bundle name in your t9n calls, like:
 
+.. code:: groovy
 	t9n.tr( s:"foo", bundle:"anybundlename" )
 
 Testing
 ```````
 The plugin itself has a built-in integration test. Before you can run it, you must call:
 
+.. code:: bash
 	grails i18n-gettext makemo
 
 to generate the ResourceBundle class files for the test.
