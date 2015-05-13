@@ -205,6 +205,7 @@ Note: xgettext cannot handle groovy's here-doc strings.
 
 The following call will collect all translatable strings that have been wrapped by a tr(), trn(), trc(), or marktr() call from your project's ".groovy", ".gsp", ".java" and ".jsp" files. The strings will be added to all ".po" files in your i18n directory. Existing .properties files won't be touched. You hand out the ".po" files to your translators. When you get them back, you put them back into your i18n directory. Each time you run the collection again, all changes will be merged into your ".po" files automagically.
 
+.. code:: bash
 	grails i18n-gettext
 
 Tip: If a translation is missing in any of your ".po" files, the original string from your source code will be shown.
