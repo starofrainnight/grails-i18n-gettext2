@@ -67,7 +67,7 @@ You may set variables that cannot be guessed by convention in "Config.groovy".
 
 * If the original texts in your code are not english, you should set the "sourceCodeLocale" to the locale of your texts.
 
- .. code:: javascript
+ .. code:: 
 	
 	I18nGettext {                                                                                                              
 		inputFileCharset = "UTF-8"                                                                                          
