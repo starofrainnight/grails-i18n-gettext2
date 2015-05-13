@@ -15,14 +15,15 @@ Description
 
 This plugin adds i18n support to your app, in 'gnu gettext'-style. (see: gettext homepage)
 
-   | No more variables (".properties" keys) instead of translatable strings in your code    
-   | No more obsolete translations you will not be able to identify after some time    
-   | No more telling translators about how to handle ".properties" files without destroying them    
-   | Very easy plural handling. You will love it.    
-   | MessageFormat-like string concatenation    
-   | More readable code, because you know exactly what text will be visible to users    
-   | Does not interfere with your existing translations, so you may keep your 'legacy' translations and start transition to i18n-gettext today    
-   | Extracting strings and merging translations can be automated by scripts
+ .. line-block::
+   No more variables (".properties" keys) instead of translatable strings in your code    
+   No more obsolete translations you will not be able to identify after some time    
+   No more telling translators about how to handle ".properties" files without destroying them    
+   Very easy plural handling. You will love it.    
+   MessageFormat-like string concatenation    
+   More readable code, because you know exactly what text will be visible to users    
+   Does not interfere with your existing translations, so you may keep your 'legacy' translations and start transition to i18n-gettext today    
+   Extracting strings and merging translations can be automated by scripts
 
 This plugin adds i18n support to your app, in 'gnu gettext'-style.
 
@@ -49,6 +50,7 @@ Installation
 
 To install the plugin, type this command in your project's root folder:
 
+ .. line-block::
 	grails install-plugin i18n-gettext
 
 Additional requirements
@@ -61,10 +63,11 @@ Optional configuration
 
 You may set variables that cannot be guessed by convention in "Config.groovy".
 
-    In case your whole translation chain is using a different charset than UTF-8, you can set that in "inputFileCharset". You ought to know what you're doing, because mixing charsets can bring you a lot of hair-pulling.
-    
-    If the original texts in your code are not english, you should set the "sourceCodeLocale" to the locale of your texts.
+* In case your whole translation chain is using a different charset than UTF-8, you can set that in "inputFileCharset". You ought to know what you're doing, because mixing charsets can bring you a lot of hair-pulling.
 
+* If the original texts in your code are not english, you should set the "sourceCodeLocale" to the locale of your texts.
+
+ .. line-block::
 	I18nGettext {                                                                                                              
 		inputFileCharset = "UTF-8"                                                                                          
 		sourceCodeLocale = "en"                                                                                                 		
@@ -72,11 +75,13 @@ You may set variables that cannot be guessed by convention in "Config.groovy".
 
 Tip: Use UTF-8 for your source code files, po files and content-type of your delivered pages. Tell your favourite code editor about that, too. In case you receive warnings about charset >>en<< when executing
 
- grails i18n-gettext
+ .. line-block::
+	grails i18n-gettext
 
 , check all .po files in i18n directory. There you'd better have this line amongst the header lines:
 
- "Content-Type: text/plain; charset=UTF-8n"
+ .. line-block::
+	"Content-Type: text/plain; charset=UTF-8n"
 
 Usage
 -----
@@ -85,9 +90,9 @@ Preparing your code
 ```````````````````
 To make translation possible, there are tags or service methods you need to wrap around all texts you'd like to translate. This has two effects:
 
-1.) All text inside the wrapping methods will later be collected by the xgettext tool for translation.
+1) All text inside the wrapping methods will later be collected by the xgettext tool for translation.
 
-2.) The wrapping methods later actually will return the translated string during runtime. Any string that has not been translated to another language will be returned in the original language from your source code.
+2) The wrapping methods later actually will return the translated string during runtime. Any string that has not been translated to another language will be returned in the original language from your source code.
 
 Note: Empty strings "" may be 'translated' to a default text from the header of your translation files. Do not pass empty strings to the wrapper methods. Note: When using the taglib of this plugin, the order of attributes is important and will be enforced by the service and the taglib. xgettext relies on the correct order of the attributes.
 
@@ -95,6 +100,7 @@ Domain classes and controller classes
 `````````````````````````````````````
 In domain classes, use the t9nService by defining the service and declaring the service as transient. You use the translation methods via the service.
 
+ .. line-block::
 	def t9nService
 	static transients = ['t9nService']
 
@@ -102,10 +108,12 @@ In domain classes, use the t9nService by defining the service and declaring the 
 
 In controller classes, you can access all translation methods via the taglib namespace:
 
+ .. line-block::
 	t9n.tr( s"string to translate" )
 
 The methods/tags work like this:
 
+ .. line-block::
 	// returns: the current locale as a string, e.g. "de_DE"
 	getCurrentLocale()
 
@@ -178,7 +186,7 @@ View classes
 ````````````
 The way the translation methods work is the same as with controllers, via the t9n namespace. In the .gsp files of your views, you call the tags like methods:
 
-.. code:: java
+ .. line-block::
 	// several examples of method calls:
 	<%=t9n.getCurrentLocale() %>
 	<%=t9n.tr( s:"foo{0}", f["bar"] ) %>
@@ -192,6 +200,7 @@ i18n-gettext comes with some scripts that help you collect all translatable stri
 
 First of all, you add new locales to your project which you want to translate later. You can add new locales at any time, so you're safe if you decide to translate your app into any other language after 2 years in production. For each locale you add, you will find a ".po" file in your project's i18n directory. It will be filled with translatable strings by the next script. A "Messages.po" file will also be generated. It's a kind of fallback file, and you should not translate its contents. If you wish, think of it as the "null"-locale. Existing ".properties" files in your i18n directory won't be touched at all.
 
+ .. line-block::
 	// Add a new locale to your code. 
 	// The locale's name follows the usual conventions 
 	// ("de_DE", "de", "en_US", "en", yaddayadda...)
@@ -201,31 +210,31 @@ Note: xgettext cannot handle groovy's here-doc strings.
 
 The following call will collect all translatable strings that have been wrapped by a tr(), trn(), trc(), or marktr() call from your project's ".groovy", ".gsp", ".java" and ".jsp" files. The strings will be added to all ".po" files in your i18n directory. Existing .properties files won't be touched. You hand out the ".po" files to your translators. When you get them back, you put them back into your i18n directory. Each time you run the collection again, all changes will be merged into your ".po" files automagically.
 
-.. code:: bash
+ .. line-block::
 	grails i18n-gettext
 
 Tip: If a translation is missing in any of your ".po" files, the original string from your source code will be shown.
 
 After your translators did their work, you use the following script to compile all translations into ResourceBundle class files. When done, these files will live in the "web-app/WEB-INF/i18n-gettext/" directory - ready for production.
 
-.. code:: bash
+ .. line-block::
 	grails i18n-gettext makemo
 
 To create a message bundle with a different name, call:
 
-.. code:: bash
+ .. line-block::
 	grails i18n-gettext makemo anybundlename
 
 To fetch strings from that specific bundle, state the bundle name in your t9n calls, like:
 
-.. code:: groovy
+ .. line-block::
 	t9n.tr( s:"foo", bundle:"anybundlename" )
 
 Testing
 ```````
 The plugin itself has a built-in integration test. Before you can run it, you must call:
 
-.. code:: bash
+ .. line-block::
 	grails i18n-gettext makemo
 
 to generate the ResourceBundle class files for the test.
@@ -243,37 +252,37 @@ Plugin version history
 
 0.98 (2010-11-01)
 
-    * HUGE performance boost, caching fix, thread-safety fix and added bundle support. Updating to this release is strongly recommended if you love your own application, i18n and performance
+* HUGE performance boost, caching fix, thread-safety fix and added bundle support. Updating to this release is strongly recommended if you love your own application, i18n and performance
 
 0.94 (2010-05-30)
 
-    * bug fix release
+* bug fix release
 
 0.93 (2010-05-21)
 
-    * small but important fix that makes it possible to have special chars in your original strings. Kudos to Ales from the grails user mailing list !
+* small but important fix that makes it possible to have special chars in your original strings. Kudos to Ales from the grails user mailing list !
 
 0.92 (2010-05-20)
 
-    * upgraded to grails 1.3.1
-    * fixed gant scripts
+* upgraded to grails 1.3.1
+* fixed gant scripts
 
 0.84 (2009-03-11)
 
-    * makemo ant task fixed
-    * upgraded to grails 1.1
+* makemo ant task fixed
+* upgraded to grails 1.1
 
 0.83 (2009-03-02)
 
-    * Cleaned up path handling and generating a i18n-gettext.jar file in /lib as a result of makemo
-    Built with 1.1-RC2
+* Cleaned up path handling and generating a i18n-gettext.jar file in /lib as a result of makemo
+* Built with 1.1-RC2
 
 0.8 (2009-02-24)
 
-    * Use translation methods via taglib namespace t9n in views, controllers and taglibs
-    * Use translation methods via t9nService in domains and service classes.
-    * Use the same attributes for both, and RESPECT THE ORDER OF ATTRIBUTES. (xgettext requirement)
+* Use translation methods via taglib namespace t9n in views, controllers and taglibs
+* Use translation methods via t9nService in domains and service classes.
+* Use the same attributes for both, and RESPECT THE ORDER OF ATTRIBUTES. (xgettext requirement)
 
 0.1 (2008-10-14)
 
-    * Initial release
+* Initial release
