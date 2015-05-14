@@ -50,7 +50,8 @@ Installation
 
 To install the plugin, type this command in your project's root folder:
 
- .. line-block::
+ .. code:: bash
+ 
 	grails install-plugin i18n-gettext
 
 Additional requirements
