@@ -7,7 +7,7 @@ This project is cloned from https://svn.codehaus.org/grails-plugins/grails-i18n-
 
 There no new updates after 2010-11-02, it's not works for grails 2.x later.
 
-So I branch from 0.98 and renamed project to grails-i18n-gettext2 ( Means grails-i18n-gettext for 2.x )
+So I fork from 0.98 and renamed project to grails-i18n-gettext2 ( Means grails-i18n-gettext for 2.x )
 
 Description
 ------------------
