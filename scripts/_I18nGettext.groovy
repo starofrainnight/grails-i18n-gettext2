@@ -9,17 +9,17 @@ def getConfigValue = { what->
 	try {
 	   switch( what ){
 			case"inputFileCharset":
-				result = config.t9n?.inputFileCharset?config.t9n.inputFileCharset.toString():"UTF-8"
+				result = config.I18nGettext?.inputFileCharset?config.I18nGettext.inputFileCharset.toString():"UTF-8"
 				return result 
 			break
 	
 			case"excludedDirsArray":
-				result = config.t9n?.excludedDirsArray?config.t9n.excludedDirsArray:[]
+				result = config.I18nGettext?.excludedDirsArray?config.I18nGettext.excludedDirsArray:[]
 				return result 
 			break
 	
 			case"noWrapPoLines":
-				result = config.t9n?.noWrapPoLines?true:false
+				result = config.I18nGettext?.noWrapPoLines?true:false
 				return result 
 			break
 			
