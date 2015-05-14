@@ -37,7 +37,8 @@ def getConfigValue = { what->
 
 
 target( scan:"Generate .pot file from sources" ){
-		
+	depends(compile, createConfig)
+	
     println("\nGenerating .pot file from sources.")
 
     def charset = getConfigValue( "inputFileCharset" )
@@ -92,7 +93,8 @@ target( scan:"Generate .pot file from sources" ){
 
 
 target( mergepo:"Merging .po files with .pot file" ){
-
+	depends(compile, createConfig)
+	
 	println( "\nMerging .po files with .pot file." )
 	fileNameToCreate = "Messages"
     touchpo()        // the default Resource
@@ -117,7 +119,8 @@ target( mergepo:"Merging .po files with .pot file" ){
 
 
 target( makemo:"Compile .mo files" ){ params->
-
+	depends(compile, createConfig)
+	
 	bundleName = "i18ngettext.Messages"
 		
 	if( bundle ){
@@ -161,7 +164,8 @@ target( makemo:"Compile .mo files" ){ params->
 
 
 target( touchpo:"Initialize first .po file" ) { params->
-
+	depends(compile, createConfig)
+	
 	def charset = getConfigValue( "inputFileCharset" )
     def header = """
 # SOME DESCRIPTIVE TITLE.
