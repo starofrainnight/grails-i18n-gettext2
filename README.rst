@@ -204,7 +204,7 @@ i18n-gettext comes with some scripts that help you collect all translatable stri
 
 First of all, you add new locales to your project which you want to translate later. You can add new locales at any time, so you're safe if you decide to translate your app into any other language after 2 years in production. For each locale you add, you will find a ".po" file in your project's i18n directory. It will be filled with translatable strings by the next script. A "Messages.po" file will also be generated. It's a kind of fallback file, and you should not translate its contents. If you wish, think of it as the "null"-locale. Existing ".properties" files in your i18n directory won't be touched at all.
 
- .. code:: bash
+ .. code:: groovy
 
 	// Add a new locale to your code. 
 	// The locale's name follows the usual conventions 
