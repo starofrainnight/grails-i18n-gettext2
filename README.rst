@@ -112,21 +112,21 @@ In domain classes, use the t9nService by defining the service and declaring the 
 
 In controller classes, you can access all translation methods via the taglib namespace:
 
- .. line-block::
+ .. code:: groovy
+ 
 	t9n.tr( s"string to translate" )
 
 The methods/tags work like this:
 
  .. code:: groovy
+ 
 	// returns: the current locale as a string, e.g. "de_DE"
 	getCurrentLocale()
-
 
 	// returns: the translation of "foo" according to the current session's locale
 	tr( s:"foo" )
 	// returns: the german translation of "foo"
 	tr( s:"foo", locale:"de" )
-
 
 	// returns: the translation of "foo" according to the current session's locale, 
 	// and concatenated with the untranslated word "bar"
