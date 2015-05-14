@@ -77,13 +77,13 @@ You may set variables that cannot be guessed by convention in "Config.groovy".
 
 Tip: Use UTF-8 for your source code files, po files and content-type of your delivered pages. Tell your favourite code editor about that, too. In case you receive warnings about charset >>en<< when executing
 
- .. line-block::
+ .. code:: bash
 	grails i18n-gettext
 
 , check all .po files in i18n directory. There you'd better have this line amongst the header lines:
 
- .. line-block::
-	"Content-Type: text/plain; charset=UTF-8n"
+ .. code:: html
+	"Content-Type: text/plain; charset=UTF-8"
 
 Usage
 -----
