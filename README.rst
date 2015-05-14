@@ -78,11 +78,13 @@ You may set variables that cannot be guessed by convention in "Config.groovy".
 Tip: Use UTF-8 for your source code files, po files and content-type of your delivered pages. Tell your favourite code editor about that, too. In case you receive warnings about charset >>en<< when executing
 
  .. code:: bash
+ 
 	grails i18n-gettext
 
 , check all .po files in i18n directory. There you'd better have this line amongst the header lines:
 
  .. code:: html
+ 
 	"Content-Type: text/plain; charset=UTF-8"
 
 Usage
@@ -102,7 +104,8 @@ Domain classes and controller classes
 `````````````````````````````````````
 In domain classes, use the t9nService by defining the service and declaring the service as transient. You use the translation methods via the service.
 
- .. line-block::
+ .. code:: groovy
+ 
 	def t9nService
 	static transients = ['t9nService']
 
