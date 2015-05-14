@@ -15,15 +15,14 @@ Description
 
 This plugin adds i18n support to your app, in 'gnu gettext'-style. (see: gettext homepage)
 
- .. line-block::
-   No more variables (".properties" keys) instead of translatable strings in your code    
-   No more obsolete translations you will not be able to identify after some time    
-   No more telling translators about how to handle ".properties" files without destroying them    
-   Very easy plural handling. You will love it.    
-   MessageFormat-like string concatenation    
-   More readable code, because you know exactly what text will be visible to users    
-   Does not interfere with your existing translations, so you may keep your 'legacy' translations and start transition to i18n-gettext today    
-   Extracting strings and merging translations can be automated by scripts
+* No more variables (".properties" keys) instead of translatable strings in your code    
+* No more obsolete translations you will not be able to identify after some time    
+* No more telling translators about how to handle ".properties" files without destroying them    
+* Very easy plural handling. You will love it.    
+* MessageFormat-like string concatenation    
+* More readable code, because you know exactly what text will be visible to users    
+* Does not interfere with your existing translations, so you may keep your 'legacy' translations and start transition to i18n-gettext today    
+* Extracting strings and merging translations can be automated by scripts
 
 This plugin adds i18n support to your app, in 'gnu gettext'-style.
 
@@ -118,7 +117,7 @@ In controller classes, you can access all translation methods via the taglib nam
 
 The methods/tags work like this:
 
- .. line-block::
+ .. code:: groovy
 	// returns: the current locale as a string, e.g. "de_DE"
 	getCurrentLocale()
 
@@ -191,7 +190,7 @@ View classes
 ````````````
 The way the translation methods work is the same as with controllers, via the t9n namespace. In the .gsp files of your views, you call the tags like methods:
 
- .. line-block::
+ .. code:: groovy
 	// several examples of method calls:
 	<%=t9n.getCurrentLocale() %>
 	<%=t9n.tr( s:"foo{0}", f["bar"] ) %>
@@ -205,7 +204,8 @@ i18n-gettext comes with some scripts that help you collect all translatable stri
 
 First of all, you add new locales to your project which you want to translate later. You can add new locales at any time, so you're safe if you decide to translate your app into any other language after 2 years in production. For each locale you add, you will find a ".po" file in your project's i18n directory. It will be filled with translatable strings by the next script. A "Messages.po" file will also be generated. It's a kind of fallback file, and you should not translate its contents. If you wish, think of it as the "null"-locale. Existing ".properties" files in your i18n directory won't be touched at all.
 
- .. line-block::
+ .. code:: bash
+
 	// Add a new locale to your code. 
 	// The locale's name follows the usual conventions 
 	// ("de_DE", "de", "en_US", "en", yaddayadda...)
@@ -215,31 +215,36 @@ Note: xgettext cannot handle groovy's here-doc strings.
 
 The following call will collect all translatable strings that have been wrapped by a tr(), trn(), trc(), or marktr() call from your project's ".groovy", ".gsp", ".java" and ".jsp" files. The strings will be added to all ".po" files in your i18n directory. Existing .properties files won't be touched. You hand out the ".po" files to your translators. When you get them back, you put them back into your i18n directory. Each time you run the collection again, all changes will be merged into your ".po" files automagically.
 
- .. line-block::
+ .. code:: bash
+ 
 	grails i18n-gettext
 
 Tip: If a translation is missing in any of your ".po" files, the original string from your source code will be shown.
 
 After your translators did their work, you use the following script to compile all translations into ResourceBundle class files. When done, these files will live in the "web-app/WEB-INF/i18n-gettext/" directory - ready for production.
 
- .. line-block::
+ .. code:: bash
+ 
 	grails i18n-gettext makemo
 
 To create a message bundle with a different name, call:
 
- .. line-block::
+ .. code:: bash
+ 
 	grails i18n-gettext makemo anybundlename
 
 To fetch strings from that specific bundle, state the bundle name in your t9n calls, like:
 
- .. line-block::
+ .. code:: groovy
+ 
 	t9n.tr( s:"foo", bundle:"anybundlename" )
 
 Testing
 ```````
 The plugin itself has a built-in integration test. Before you can run it, you must call:
 
- .. line-block::
+ .. code:: bash
+ 
 	grails i18n-gettext makemo
 
 to generate the ResourceBundle class files for the test.
